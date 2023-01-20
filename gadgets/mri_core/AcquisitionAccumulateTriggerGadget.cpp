@@ -29,6 +29,7 @@ namespace Gadgetron {
             case TriggerDimension::user_5: return header.idx.user[5];
             case TriggerDimension::user_6: return header.idx.user[6];
             case TriggerDimension::user_7: return header.idx.user[7];
+            case TriggerDimension::parallel_calibration: return (unsigned short) header.isFlagSet(ISMRMRD::ISMRMRD_ACQ_IS_PARALLEL_CALIBRATION);
             case TriggerDimension::n_acquisitions: return 0;
             case TriggerDimension::none: return 0;
             }
@@ -106,7 +107,8 @@ namespace Gadgetron {
             case TriggerDimension::user_4:
             case TriggerDimension::user_5:
             case TriggerDimension::user_6:
-            case TriggerDimension::user_7: return EqualityTrigger(gadget.trigger_dimension);
+            case TriggerDimension::user_7:
+            case TriggerDimension::parallel_calibration: return EqualityTrigger(gadget.trigger_dimension);
             case TriggerDimension::n_acquisitions: return NumAcquisitionsTrigger(gadget.n_acquisitions_before_trigger,gadget.n_acquisitions_before_ongoing_trigger);
             case TriggerDimension::none: return NoneTrigger();
             default: throw std::runtime_error("ENUM TriggerDimension is in an invalid state.");
@@ -179,7 +181,8 @@ namespace Gadgetron {
             { "user_1", TriggerDimension::user_1 }, { "user_2", TriggerDimension::user_2 },
             { "user_3", TriggerDimension::user_3 }, { "user_4", TriggerDimension::user_4 },
             { "user_5", TriggerDimension::user_5 }, { "user_6", TriggerDimension::user_6 },
-            { "user_7", TriggerDimension::user_7 }, { "n_acquisitions", TriggerDimension::n_acquisitions },
+            { "user_7", TriggerDimension::user_7 }, { "parallel_calibration", TriggerDimension::parallel_calibration },
+            { "n_acquisitions", TriggerDimension::n_acquisitions },
             { "none", TriggerDimension::none }, { "", TriggerDimension::none }
         };
     }
