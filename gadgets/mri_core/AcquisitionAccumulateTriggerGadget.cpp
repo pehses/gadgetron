@@ -76,6 +76,9 @@ struct FlagRemovedTrigger {
     bool trigger_before(const ISMRMRD::AcquisitionHeader& head) {
         auto flag_active = get_index(head, trigger);
         auto result = (previous_trigger != flag_active && !flag_active && previous_trigger != Core::none);
+
+        GDEBUG("Previous Trigger: %d, Trigger: %d, result: %d\n", previous_trigger, flag_active, result);
+
         previous_trigger = flag_active;
         return result;
     }
